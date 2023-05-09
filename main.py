@@ -1,5 +1,6 @@
 #Podstawowy plik na którym będzie działać projekt
 #Filip Słowik, Igor Curyło
+from random import randint
 
 def plansza(pola):
     print("  1 2 3")
@@ -13,10 +14,10 @@ def plansza(pola):
             elif pola[i][j] == 1:
                 wiersz += "X"
             if j != 2:
-                wiersz += "|"
+                wiersz += "│"
         print(wiersz)
         if i != 2:
-            print("  -----")
+            print("  ─┼─┼─")
 def check_win(pola, gracz):
     for i in range(3):
         if pola[i][0] == gracz and pola[i][1] == gracz and pola[i][2] == gracz:
@@ -37,39 +38,20 @@ def play_game():
         while True:
             plansza(pola)
             print("gracz", gracz+1)
-            wiersz = int(input("wprowadź wiersz z zakresu (1-3): "))
-            while wiersz not in range(1,4):
+            wiersz = 0
+            while wiersz not in range(1,4):  
+                wiersz = (input("wpisz wiersz z zakresu (1-3): ")) 
+                if wiersz.isnumeric():  
+                    wiersz = int(wiersz) 
+                    pass
                 print("podaj poprawne pole")
-                wiersz = int(input("wprowadź wiersz z zakresu (1-3): "))
-            kol = int(input("wprowadź kolumne z zakresu (1-3): "))
-            while kol not in range(1,4):
+            kol = 0
+            while kol not in range(1,4):  
+                kol = (input("wpisz kol z zakresu (1-3): ")) 
+                if kol.isnumeric():  
+                    kol = int(kol) 
+                    pass
                 print("podaj poprawne pole")
-                kol = int(input("wprowadź kolumne z zakresu (1-3): "))
-            if pola[wiersz-1][kol-1] == -1:
-                pola[wiersz-1][kol-1] = gracz
-                if check_win(pola, gracz):
-                    plansza(pola)
-                    print("gracz", gracz+1, "wins!")
-                    return
-
-                if gracz == 0:
-                    gracz = 1
-                else:
-                    gracz = 0
-            else:
-                print("pole jest zajęte")
-    elif tryb == "k":
-        while True:
-            plansza(pola)
-            print("gracz", gracz+1)
-            wiersz = int(input("wprowadź wiersz z zakresu (1-3): "))
-            while wiersz not in range(1,4):
-                print("podaj poprawne pole")
-                wiersz = int(input("wprowadź wiersz z zakresu (1-3): "))
-            kol = int(input("wprowadź kolumne z zakresu (1-3): "))
-            while kol not in range(1,4):
-                print("podaj poprawne pole")
-                kol = int(input("wprowadź kolumne z zakresu (1-3): "))
             if pola[wiersz-1][kol-1] == -1:
                 pola[wiersz-1][kol-1] = gracz
                 if check_win(pola, gracz):
@@ -83,6 +65,40 @@ def play_game():
                     gracz = 0
             else:
                 print("pole jest zajęte")
+    elif tryb == "k":
+        while True:
+            plansza(pola)
+            print("gracz", gracz+1)
+            wiersz = 0
+            while wiersz not in range(1,4):  
+                wiersz = (input("wpisz wiersz z zakresu (1-3): ")) 
+                if wiersz.isnumeric():  
+                    wiersz = int(wiersz) 
+                    pass
+                print("podaj poprawne pole")
+            kol = 0
+            while kol not in range(1,4):  
+                kol = (input("wpisz kol z zakresu (1-3): ")) 
+                if kol.isnumeric():  
+                    kol = int(kol) 
+                    pass
+                print("podaj poprawne pole")
+            if pola[wiersz-1][kol-1] == -1:
+                pola[wiersz-1][kol-1] = gracz
+                if check_win(pola, gracz):
+                    plansza(pola)
+                    print("gracz", gracz+1, "wygrywa!")
+                    return
+            else:
+                print("pole jest zajęte")
+            flag = False
+            while flag==False:
+                wiersz = randint(0,2)
+                kol = randint(0,2)
+                if pola[wiersz][kol] == -1:
+                    pola[wiersz][kol] = 1
+                    flag = True
+                
     else:
         print("wybierz poprawny tryb \n")
 
