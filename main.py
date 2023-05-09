@@ -32,29 +32,35 @@ def check_win(pola, gracz):
 def play_game():
     pola = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]] 
     gracz = 0
-    while True:
-        plansza(pola)
-        print("gracz", gracz+1)
-        wiersz = int(input("wprowadź wiersz z zakresu (1-3): "))
-        while wiersz not in range(1,4):
-            print("podaj poprawne pole")
+    tryb = input("wybierz czy chcesz grać z komputerem (k) czy z drugim graczem (g)")
+    if tryb == "g":
+        while True:
+            plansza(pola)
+            print("gracz", gracz+1)
             wiersz = int(input("wprowadź wiersz z zakresu (1-3): "))
-        kol = int(input("wprowadź kolumne z zakresu (1-3): "))
-        while kol not in range(1,4):
-            print("podaj poprawne pole")
+            while wiersz not in range(1,4):
+                print("podaj poprawne pole")
+                wiersz = int(input("wprowadź wiersz z zakresu (1-3): "))
             kol = int(input("wprowadź kolumne z zakresu (1-3): "))
-        if pola[wiersz-1][kol-1] == -1:
-            pola[wiersz-1][kol-1] = gracz
-            if check_win(pola, gracz):
-                plansza(pola)
-                print("gracz", gracz+1, "wins!")
-                return
+            while kol not in range(1,4):
+                print("podaj poprawne pole")
+                kol = int(input("wprowadź kolumne z zakresu (1-3): "))
+            if pola[wiersz-1][kol-1] == -1:
+                pola[wiersz-1][kol-1] = gracz
+                if check_win(pola, gracz):
+                    plansza(pola)
+                    print("gracz", gracz+1, "wins!")
+                    return
 
-            if gracz == 0:
-                gracz = 1
+                if gracz == 0:
+                    gracz = 1
+                else:
+                    gracz = 0
             else:
-                gracz = 0
-        else:
-            print("pole jest zajęte")
+                print("pole jest zajęte")
+    elif tryb == "k":
+        pass
+    else:
+        print("wybierz poprawny tryb \n")
 
 play_game()
