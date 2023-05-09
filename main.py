@@ -1,1 +1,1 @@
-Podstawowy plik na którym będzie działać projekt
+#Podstawowy plik na którym będzie działać projekt
