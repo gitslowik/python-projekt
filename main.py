@@ -1,85 +1,45 @@
 #Podstawowy plik na którym będzie działać projekt
 #Filip Słowik, Igor Curyło
 
-import os
-from colorama import Fore, Back
+def plansza(pola):
+    print("  1 2 3")
+    for i in range(3):
+        wiersz = str(i+1) + " "
+        for j in range(3):
+            if pola[i][j] == -1:
+                wiersz += " "
+            elif pola[i][j] == 0:
+                wiersz += "O"
+            elif pola[i][j] == 1:
+                wiersz += "X"
+            if j != 2:
+                wiersz += "|"
+        print(wiersz)
+        if i != 2:
+            print("  -----")
 
-def printWhite(data):
-    print(Fore.WHITE,data,end="",sep="")
-
-def printRed(data):
-    print(Fore.RED,data,end="",sep="")
-
-def printGreen(data):
-    print(Fore.GREEN,data,end="",sep="")
-
-def screenXO(screen):
-    os.system('cls')
-
-    
-    corners = {
-               "upperLeft":     "┌",    #218 np. chr(218)
-               "upperRight":    "┐",    #191
-               "mediumLeft":    "├",    #195 
-               "mediumRight":   "┤",    #180
-               "bottomLeft":    "└",    #192
-               "bottomRight":   "┘",    #217
-               "upperMid":      "┬",    #194
-               "midiumMid":     "┼",    #197
-               "bottomMid":     "┴"     #193
-              }
-    lines =   {
-               "vertical": "│",         #179
-               "horizontal": "─"        #196
-              }
-    
-    size = len(screen)                  #rozmiar ekranu
-
-    verticalLine = [lines["horizontal"]*3]*size         #lista zawierająca poziome linie
-    # print(verticalLine)
-    
-    verticalUp = corners["upperMid"].join(verticalLine)
-    verticalMid = corners["midiumMid"].join(verticalLine)
-    verticalDown = corners["bottomMid"].join(verticalLine)
-    # print(verticalUp)
-    # print(verticalMid)
-    # print(verticalDown)
-
-   
-
-    printWhite(corners["upperLeft"]+verticalUp+corners["upperRight"]+"\n")
- 
-    for i,row in enumerate(screen):
-        printWhite(lines["vertical"])
-        for j in row:
-            if(j>0): printGreen(" X ")
-            elif j<0: printRed(" O ")
-            else: printWhite("   ")
-            printWhite(lines["vertical"])            
-        print()
-        if(i < size-1): printWhite(corners["mediumLeft"]+verticalMid+corners["mediumRight"]+"\n")
-
-    printWhite(corners["bottomLeft"]+verticalDown+corners["bottomRight"]+"\n")
-
-
-
-if __name__ == "__main__":
-
-    rozmiar = 10
-    dane = []
-    for i in range(rozmiar):
-        kolumna = [0 for i in range(rozmiar)]
-        dane.append(kolumna)
-    
-    # print(dane)
-   
-
-    gracz = 1
+def play_game():
+    pola = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]] 
+    gracz = 0
     while True:
-        screenXO(dane)
-        if gracz == 1: printGreen("Gracz 1\n")
-        else: printRed("Gracz 2\n")
-        x = int(input("Podaj wsp x: "))
-        y = int(input("Podaj wsp y: "))
-        dane[y][x] = gracz
-        gracz *= -1
+        plansza(pola)
+        print("gracz", gracz+1)
+        wiersz = int(input("wprowadź wiersz z zakresu (1-3): "))
+        while wiersz not in range(1,4):
+            print("podaj poprawne pole")
+            wiersz = int(input("wprowadź wiersz z zakresu (1-3): "))
+        kol = int(input("wprowadź kolumne z zakresu (1-3): "))
+        while kol not in range(1,4):
+            print("podaj poprawne pole")
+            kol = int(input("wprowadź kolumne z zakresu (1-3): "))
+        if pola[wiersz-1][kol-1] == -1:
+            pola[wiersz-1][kol-1] = gracz
+            
+            if gracz == 0:
+                gracz = 1
+            else:
+                gracz = 0
+        else:
+            print("pole jest zajęte")
+
+play_game()
