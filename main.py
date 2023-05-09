@@ -17,6 +17,17 @@ def plansza(pola):
         print(wiersz)
         if i != 2:
             print("  -----")
+def check_win(pola, gracz):
+    for i in range(3):
+        if pola[i][0] == gracz and pola[i][1] == gracz and pola[i][2] == gracz:
+            return True
+        if pola[0][i] == gracz and pola[1][i] == gracz and pola[2][i] == gracz:
+            return True
+    if pola[0][0] == gracz and pola[1][1] == gracz and pola[2][2] == gracz:
+        return True
+    if pola[0][2] == gracz and pola[1][1] == gracz and pola[2][0] == gracz:
+        return True
+    return False
 
 def play_game():
     pola = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]] 
@@ -34,7 +45,11 @@ def play_game():
             kol = int(input("wprowadź kolumne z zakresu (1-3): "))
         if pola[wiersz-1][kol-1] == -1:
             pola[wiersz-1][kol-1] = gracz
-            
+            if check_win(pola, gracz):
+                plansza(pola)
+                print("gracz", gracz+1, "wins!")
+                return
+
             if gracz == 0:
                 gracz = 1
             else:
