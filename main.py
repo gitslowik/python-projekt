@@ -1,5 +1,5 @@
 #Podstawowy plik na którym będzie działać projekt
-#Filip Słowik, Igor Curyło
+#Filip Słowik(gitslowik), Igor Curyło(podjeyfa)
 from random import randint
 from colorama import Fore, Back, Style
 
@@ -34,7 +34,13 @@ def check_win(pola, gracz):
     if pola[0][2] == gracz and pola[1][1] == gracz and pola[2][0] == gracz:
         return True
     return False
-
+def stalemate(pola):
+    flat = sum(pola, [])
+    licz = flat.count(-1)
+    if licz >0:
+        return False
+    elif licz == 0:
+        return True
 def play_game():
     pola = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]] 
     gracz = 0
@@ -73,7 +79,12 @@ def play_game():
                         print(Style.RESET_ALL)
 
                     return
-
+                elif stalemate(pola):
+                    print(Back.PURPLE)
+                    plansza(pola)
+                    print("remis")
+                    print(Style.RESET_ALL)
+                    return
                 if gracz == 0:
                     gracz = 1
                 else:
@@ -114,6 +125,12 @@ def play_game():
                         print(Style.RESET_ALL)
 
                     return
+                elif stalemate(pola):
+                    print(Back.PURPLE)
+                    plansza(pola)
+                    print("remis")
+                    print(Style.RESET_ALL)
+                    return
             else:
                 printRED("pole jest zajęte")
             
@@ -123,7 +140,13 @@ def play_game():
                 if pola[wiersz][kol] == -1:
                     pola[wiersz][kol] = 1
                     flag = True
-            
+                if check_win(pola, 1):
+                        print(Back.RED)
+                        plansza(pola)
+                        print("Komputer wygrywa!")
+                        print(Style.RESET_ALL)
+                        return
+
     else:
         print("wybierz poprawny tryb \n")
         play_game()
