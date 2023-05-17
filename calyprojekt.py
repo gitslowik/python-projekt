@@ -1,10 +1,5 @@
-#w razie gdyby coś nie działało prosze otworzyć calyprojekt.py(na nim bazował cały projekt więc na pewno wszystko tam działa, ale nie jest porozdzielane na poszczególne pliki)
-
-#Filip Słowik(gitslowik), Igor Curyło(podjeyfa)import mapa
-
-import stalemate
-import win
-import mapa
+#Podstawowy plik na którym bazuje projekt
+#Filip Słowik(gitslowik), Igor Curyło(podjeyfa)
 from random import randint
 from colorama import Fore, Back, Style
 
@@ -12,14 +7,47 @@ from colorama import Fore, Back, Style
 def printRED(tekst):
     print(Fore.RED, tekst)
     print(Style.RESET_ALL)
-
+def plansza(pola):
+    print("  1   2   3")
+    for i in range(3):
+        wiersz = str(i+1) + " "
+        for j in range(3):
+            if pola[i][j] == -1:
+                wiersz += " "
+            elif pola[i][j] == 0:
+                wiersz += "◯"
+            elif pola[i][j] == 1:
+                wiersz += "✖"
+            if j != 2:
+                wiersz += " │ "
+        print(wiersz)
+        if i != 2:
+            print("  ──┼───┼──")
+def check_win(pola, gracz):
+    for i in range(3):
+        if pola[i][0] == gracz and pola[i][1] == gracz and pola[i][2] == gracz:
+            return True
+        if pola[0][i] == gracz and pola[1][i] == gracz and pola[2][i] == gracz:
+            return True
+    if pola[0][0] == gracz and pola[1][1] == gracz and pola[2][2] == gracz:
+        return True
+    if pola[0][2] == gracz and pola[1][1] == gracz and pola[2][0] == gracz:
+        return True
+    return False
+def stalemate(pola):
+    flat = sum(pola, [])
+    licz = flat.count(-1)
+    if licz >0:
+        return False
+    elif licz == 0:
+        return True
 def play_game():
     pola = [[-1, -1, -1], [-1, -1, -1], [-1, -1, -1]] 
     gracz = 0
     tryb = input("wybierz czy chcesz grać z komputerem (k) czy z drugim graczem (g)")
     if tryb == "g":
         while True:
-            mapa.plansza(pola)
+            plansza(pola)
             print("gracz", gracz+1)
             wiersz = 0
             while wiersz not in range(1,4):  
@@ -37,23 +65,23 @@ def play_game():
 
             if pola[wiersz-1][kol-1] == -1:
                 pola[wiersz-1][kol-1] = gracz
-                if win.check_win(pola, gracz):
+                if check_win(pola, gracz):
                     if gracz == 0:
                         print(Back.GREEN)
-                        mapa.plansza(pola)
+                        plansza(pola)
                         print("gracz", gracz+1, "wygrywa!")
                         print(Style.RESET_ALL)
 
                     else:
                         print(Back.RED)
-                        mapa.plansza(pola)
+                        plansza(pola)
                         print("gracz", gracz+1, "wygrywa!")
                         print(Style.RESET_ALL)
 
                     return
-                elif stalemate.stalemate(pola):
+                elif stalemate(pola):
                     print(Back.PURPLE)
-                    mapa.plansza(pola)
+                    plansza(pola)
                     print("remis")
                     print(Style.RESET_ALL)
                     return
@@ -66,7 +94,7 @@ def play_game():
                 
     elif tryb == "k":
         while True:
-            mapa.plansza(pola)
+            plansza(pola)
             print("gracz", gracz+1)
             wiersz = 0 
             while wiersz not in range(1,4):  
@@ -83,23 +111,23 @@ def play_game():
             if pola[wiersz-1][kol-1] == -1:
                 pola[wiersz-1][kol-1] = gracz
                 flag = False #flaga decydująca o tym czy komputer może wykonać ruch(jest ustawiana dopiero wtedy, gdy ruch jest poprawny)
-                if win.check_win(pola, gracz):
+                if check_win(pola, gracz):
                     if gracz == 0:
                         print(Back.GREEN)
-                        mapa.plansza(pola)
+                        plansza(pola)
                         print("Gracz wygrywa!")
                         print(Style.RESET_ALL)
 
                     else:
                         print(Back.RED)
-                        mapa.plansza(pola)
+                        plansza(pola)
                         print("Komputer wygrywa!")
                         print(Style.RESET_ALL)
 
                     return
-                elif stalemate.stalemate(pola):
+                elif stalemate(pola):
                     print(Back.PURPLE)
-                    mapa.plansza(pola)
+                    plansza(pola)
                     print("remis")
                     print(Style.RESET_ALL)
                     return
@@ -112,9 +140,9 @@ def play_game():
                 if pola[wiersz][kol] == -1:
                     pola[wiersz][kol] = 1
                     flag = True
-                if win.check_win(pola, 1):
+                if check_win(pola, 1):
                         print(Back.RED)
-                        mapa.plansza(pola)
+                        plansza(pola)
                         print("Komputer wygrywa!")
                         print(Style.RESET_ALL)
                         return
@@ -122,4 +150,5 @@ def play_game():
     else:
         print("wybierz poprawny tryb \n")
         play_game()
+
 play_game()
