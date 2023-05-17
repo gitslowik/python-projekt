@@ -85,7 +85,7 @@ def play_game():
         while True:
             plansza(pola)
             print("gracz", gracz+1)
-            wiersz = 0
+            wiersz = 0 
             while wiersz not in range(1,4):  
                 wiersz = (input("wpisz poprawny wiersz z zakresu (1-3): ")) 
                 if wiersz.isnumeric():  
@@ -99,13 +99,24 @@ def play_game():
                     pass
             if pola[wiersz-1][kol-1] == -1:
                 pola[wiersz-1][kol-1] = gracz
+                flag = False #flaga decydująca o tym czy komputer może wykonać ruch(jest ustawiana dopiero wtedy, gdy ruch jest poprawny)
                 if check_win(pola, gracz):
-                    plansza(pola)
-                    print("gracz", gracz+1, "wygrywa!")
+                    if gracz == 0:
+                        print(Back.GREEN)
+                        plansza(pola)
+                        print("Gracz wygrywa!")
+                        print(Style.RESET_ALL)
+
+                    else:
+                        print(Back.RED)
+                        plansza(pola)
+                        print("Komputer wygrywa!")
+                        print(Style.RESET_ALL)
+
                     return
             else:
                 printRED("pole jest zajęte")
-            flag = False
+            
             while flag==False:
                 wiersz = randint(0,2)
                 kol = randint(0,2)
