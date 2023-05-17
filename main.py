@@ -8,7 +8,15 @@ import mapa
 from random import randint
 from colorama import Fore, Back, Style
 
-
+print(" ::::::::::: ::::::::::: ::::::::                              ::::::::::: :::      ::::::::                              ::::::::::: ::::::::  :::::::::: \n")
+print("   :+:         :+:    :+:    :+:                                 :+:   :+: :+:   :+:    :+:                                 :+:    :+:    :+: :+:         \n")
+print("  +:+         +:+    +:+                                        +:+  +:+   +:+  +:+                                        +:+    +:+    +:+ +:+          \n")
+print("  +#+         +#+    +#+                 +#++:++#++:++          +#+ +#++:++#++: +#+                 +#++:++#++:++          +#+    +#+    +:+ +#++:++#      \n")
+print("  +#+         +#+    +#+                                        +#+ +#+     +#+ +#+                                        +#+    +#+    +#+ +#+            \n")
+print(" #+#         #+#    #+#    #+#                                 #+# #+#     #+# #+#    #+#                                 #+#    #+#    #+# #+#             \n")
+print("###     ########### ########                                  ### ###     ###  ########                                  ###     ########  ##########       \n")
+print("Projekt python - kółko krzyżyk\n")
+print("Autorzy - Igor Curyło (podjeyfa) i Filip Słowik(gitslowik)\n")
 def printRED(tekst):
     print(Fore.RED, tekst)
     print(Style.RESET_ALL)
