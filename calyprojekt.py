@@ -1,8 +1,18 @@
 #Podstawowy plik na którym bazuje projekt
-#Filip Słowik(gitslowik), Igor Curyło(podjeyfa)
+#Filip Słowik(gitslowik), Igor Curyło(podjeyfa) 
+##############################################################
 from random import randint
 from colorama import Fore, Back, Style
 
+print(" ::::::::::: ::::::::::: ::::::::                              ::::::::::: :::      ::::::::                              ::::::::::: ::::::::  :::::::::: \n")
+print("   :+:         :+:    :+:    :+:                                 :+:   :+: :+:   :+:    :+:                                 :+:    :+:    :+: :+:         \n")
+print("  +:+         +:+    +:+                                        +:+  +:+   +:+  +:+                                        +:+    +:+    +:+ +:+          \n")
+print("  +#+         +#+    +#+                 +#++:++#++:++          +#+ +#++:++#++: +#+                 +#++:++#++:++          +#+    +#+    +:+ +#++:++#      \n")
+print("  +#+         +#+    +#+                                        +#+ +#+     +#+ +#+                                        +#+    +#+    +#+ +#+            \n")
+print(" #+#         #+#    #+#    #+#                                 #+# #+#     #+# #+#    #+#                                 #+#    #+#    #+# #+#             \n")
+print("###     ########### ########                                  ### ###     ###  ########                                  ###     ########  ##########       \n")
+print("Projekt python - kółko krzyżyk\n")
+print("Autorzy - Igor Curyło (podjeyfa) i Filip Słowik(gitslowik)\n")
 
 def printRED(tekst):
     print(Fore.RED, tekst)
